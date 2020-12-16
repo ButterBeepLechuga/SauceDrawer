@@ -1,0 +1,30 @@
+/* Lab5.c - Jake Breitfeller */
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+        int input = 0;
+        int remaining;
+        int run = 0;
+
+        printf("Please enter a number between 100 and 10000: ");
+
+        while(run ==0){
+                scanf("%d", &input);
+                /* the while loop ensures the program will continue until the user enters a complient value */
+                if(input >= 100 && input <= 10000){
+                        printf("Your input: %d\n",input);
+                        printf("Your input reversed: ");
+                        while(input != 0){
+                                remaining = input % 10;
+                                printf("%d", remaining); /* printing the result of the modulus ensures the zeros will be returned */
+                                input /= 10; 
+                        }
+                        run++;
+                }
+                else {
+                        printf("\nPlease enter a complient value: ");
+                }
+        }
+
+}
