@@ -1,3 +1,4 @@
+/* This program is designed to calculate the area of a washer and the weight of a batch of washers using pointers */
 /* Lab6.c - Jake Breitfeller */
 #include <stdio.h>
 #define PI 3.14159
