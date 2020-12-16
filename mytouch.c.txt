@@ -1,0 +1,68 @@
+/* Lab9.c (mytouch.c) - Jake Breitfeller */
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <utime.h>
+#include <string.h>
+
+
+int main(int argc, char** argv){
+        FILE *somefile;
+        char *filename;
+        char *appendtext;
+        struct tm datetime = {0};
+        char *date;
+        char *perms;
+        time_t converted;
+/* the switch statement handles the number of command line arguments that the user enters */
+        switch(argc){
+                case 1:
+                        printf("No file name, this program takes 4 inputs: \n-file name(char)\n-update time (true = 1, false = other)\n-permissions\n-one line of content to append if file did not previously exist\n");
+                        break;
+                case 2:
+                        filename = argv[1];
+                        somefile = fopen(filename, "a"); /* the mode "a" will allow the file to be created if it does not already exist */
+                        break;
+                case 3:
+                        filename = argv[1];
+                        somefile = fopen(filename, "w");
+
+                        date = argv[2];
+                        strptime(date, "%m/%d/%Y", &datetime);
+                        converted = mktime(&datetime); /* the input is converted to a date that can be set to the file */
+                        utime(filename, &converted);
+                        break;
+                case 4:
+                        filename = argv[1];
+                        somefile = fopen(filename, "w");
+
+                        date = argv[2];
+                        strptime(date, "%m/%d/%Y", &datetime);
+                        converted = mktime(&datetime);
+                        utime(filename, &converted);
+
+                        perms = argv[3];
+                        chmod(filename, &perms); /* chmod used to change permissions of the file with the 3rd argument */
+                        break;
+                case 5:
+                        filename = argv[1];
+                        somefile = fopen(filename, "w");
+
+                        date = argv[2];
+                        strptime(date, "%m/%d/%Y", &datetime);
+                        converted = mktime(&datetime);
+                        utime(filename, &converted);
+
+                        perms = argv[3];
+                        chmod(filename, &perms);
+
+                        appendtext = argv[4];
+                        fputs(appendtext, somefile);
+                        break;
+                default:
+                        printf("error\n");
+        }
+}
