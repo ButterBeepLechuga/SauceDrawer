@@ -1,3 +1,4 @@
+/* Takes two strings as input, if they are equivalent it returns the time between either string being entered */
 /* Lab7.c - Jake Breitfeller */
 #include <stdio.h>
 #include <stdlib.h>
