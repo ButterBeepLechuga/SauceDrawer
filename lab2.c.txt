@@ -1,3 +1,4 @@
+/* This program is designed to compute the factorial of a number between 1 and 15 either recursivly or within the body of the program */
 /* Lab2.c  -  Jake Breitfeller */
 #include <stdio.h>
 #include <stdlib.h>
