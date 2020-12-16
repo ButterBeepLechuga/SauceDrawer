@@ -1,3 +1,5 @@
+/* This program is designed to calculate the area of a washer and the weight of a batch of washers given the following */
+/* inner diameter, outer diameter, thickness, density, and batch quantity */
 #include <stdio.h>
 #define PI 3.14159
 
