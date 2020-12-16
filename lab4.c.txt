@@ -1,3 +1,4 @@
+/* A grade calculator which gives the average of a set of grades and the number of grades below 70 */
 /* Lab4.c - Jake Breitfeller */
 #include <stdio.h>
 #include <stdlib.h>
