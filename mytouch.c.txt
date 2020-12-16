@@ -1,3 +1,5 @@
+/* a recreation of touch.c that allows a user to */
+/* create the file if it doesn't exist, update the modification time, change the permissions and append a line of text */
 /* Lab9.c (mytouch.c) - Jake Breitfeller */
 #include <stdlib.h>
 #include <sys/types.h>
