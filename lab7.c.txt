@@ -1,0 +1,35 @@
+/* Lab7.c - Jake Breitfeller */
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#define MAX 100
+
+int main(){
+    char text[MAX], sametext[MAX];
+    time_t start, end;
+    int samestring;
+    double inbetween;
+    
+    printf("Enter your name or some string: ");
+    fgets(text, MAX, stdin);
+    start = time(NULL);
+    
+    /* either time is taken after fgets so the user's time is based off of when they hit the enter key */
+    
+    printf("Enter the previous input again: ");
+    fgets(sametext, MAX, stdin);
+    end = time(NULL);
+    
+    samestring = strcmp(text, sametext);
+    /* strcmp returns 0 if the input strings are equivalent */
+    if(samestring == 0){
+	/* difftime takes the difference of time data */
+        inbetween = difftime(end, start);
+        printf("The time between either input in seconds %f",inbetween);
+        printf("\nThe time between either input in nanoseconds %f\n",inbetween*1000000000);
+    }
+    else{
+        printf("The two inputs do not correspond\n");
+    }
+}
