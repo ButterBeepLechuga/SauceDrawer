@@ -1,3 +1,4 @@
+/* Takes an integer between 100 and 10000 and prints the number backwards */
 /* Lab5.c - Jake Breitfeller */
 #include <stdio.h>
 #include <stdlib.h>
