@@ -1,0 +1,104 @@
+/* Lab8.c - Jake Breitfeller */
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <math.h>
+#include <string.h>
+#define MAX 50
+
+struct coordinateset{
+    double xcoordinates[MAX];
+    double ycoordinates[MAX];
+    const char label[MAX][MAX];
+};
+
+int main()
+{
+    char usernum;
+    int validnum = 0;
+    int numcoordinates;
+    struct coordinateset coordlist;
+    double vara, varb, asquared, bsquared, csquared, distance, greatestdistance;
+    double leastdistance = 999999;
+
+    /* this while loop validates the users input for the number of coordinate sets to be used */    
+    printf("How many coordinate sets would you like to enter?: ");
+    while(validnum == 0){
+        scanf(" %c", &usernum);
+        if(isdigit(usernum) && (int)usernum-48 != 1){
+            numcoordinates = (int) usernum - 48;
+            validnum = 1;
+        }
+        else{
+            printf("Please enter a valid number of coordinates greater than 1, 0 is not valid: ");
+        }
+    }
+    
+    int incrementnames = 0;
+    
+    /* this while loop gets the names for each coordinate set and lets the user know which set they are naming */
+    while(incrementnames < numcoordinates){
+        printf("Enter label %d: ", incrementnames+1);
+        scanf("%s", coordlist.label[incrementnames]);
+        incrementnames++;
+    }
+    
+    /* the following for loop compares each label and exits if two labels are the same */
+    int iloop;
+    int jloop;
+    
+    for(iloop = 0; iloop < numcoordinates; iloop++){
+        for(jloop = numcoordinates; jloop > iloop; jloop--){
+            if(strcmp(coordlist.label[iloop],coordlist.label[jloop]) == 0){
+                printf("Error two labels are the same, exiting program...\n");
+                exit(0);
+            }
+        }
+    }
+    
+    int incrementcoords = 0;
+    
+    /* this while loop gathers each set of coordinates while letting the user know which set they are defining */
+    while(incrementcoords < numcoordinates){
+        printf("Enter x coordinate %d: ", incrementcoords+1);
+        scanf("%lf", &coordlist.xcoordinates[incrementcoords]);
+        printf("Enter y coordinate %d: ", incrementcoords+1);
+        scanf("%lf", &coordlist.ycoordinates[incrementcoords]);
+        incrementcoords++;
+    }
+    
+    int kloop;
+    int lloop;
+    int coordmin1;
+    int coordmin2;
+    int coordmax1;
+    int coordmax2;
+    
+    /* using a similar double loop to the label validation each distance is measured and compared */
+    for(kloop = 0; kloop < numcoordinates; kloop++){
+        for(lloop = numcoordinates-1; lloop > kloop; lloop--){
+            vara = fabs(coordlist.xcoordinates[kloop]-coordlist.xcoordinates[lloop]);
+            varb = fabs(coordlist.ycoordinates[kloop]-coordlist.ycoordinates[lloop]);
+            asquared = vara * vara;
+            bsquared = varb * varb;
+            csquared = asquared + bsquared;
+            distance = sqrt(csquared);
+            
+            if(distance > greatestdistance){
+                greatestdistance = distance;
+                coordmax1 = kloop;
+                coordmax2 = lloop;
+            }
+            
+            if(distance < leastdistance){
+                leastdistance = distance;
+                coordmin1 = kloop;
+                coordmin2 = lloop;
+            }
+            
+        }
+    }
+    
+    printf("The greatest distance is between %s and %s : %lf\n", coordlist.label[coordmax1], coordlist.label[coordmax2], greatestdistance);
+    printf("The shortest distance is between %s and %s : %lf\n", coordlist.label[coordmin1], coordlist.label[coordmin1], leastdistance);
+}
