@@ -1,0 +1,80 @@
+/* Lab3.c - Jake Breitfeller */
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+        int valone, op, valtwo, result, choice; 
+        char a = '+'; /* the following characters are used to make a comparison later on */
+        char s = '-'; /* a = addition, s = subtraction, p = product, d = division, m = modulo */
+        char p = '*'; 
+        char d = '/'; 
+        char m = '%'; 
+        int run = 0;
+        
+        printf("Please enter a mathematic operation in the form of value operand value, do not use spaces\n");
+
+        while(run == 0){
+                scanf("%d%c%d", &valone, &op, &valtwo);
+
+                printf("you entered  %d%c%d\n", valone, op, valtwo); 
+                
+                /* the following if/if else statements use the variable choice to determine operator 
+                cases for the switch statement based on which operand was entered */
+                
+                if(op == a){
+                        choice = 1;
+                }
+                else if(op == s){
+                        choice = 2;
+                }
+                else if(op == p){
+                        choice = 3;
+                }
+                else if(op == d){
+                        choice = 4;
+                }
+                else if(op == m){
+                        choice = 5;
+                }
+                else {
+                        printf("The opperand you entered cannot be evaluated");
+                }
+
+                /* The switch statement performs the operation then prints the operation with the result*/
+
+                switch(choice){
+                        case 1:
+                                result = valone + valtwo;
+                                printf("%d %c %d = %d\n", valone, op, valtwo, result);
+                                run = 1;
+                                break;
+                        case 2:
+                                result = valone - valtwo;
+                                printf("%d %c %d = %d\n", valone, op, valtwo, result);
+                                run = 1;
+                                break;
+                        case 3:
+                                result = valone * valtwo;
+                                printf("%d %c %d = %d\n", valone, op, valtwo, result);
+                                run = 1;
+                                break;
+                        case 4:
+                                result = valone / valtwo;
+                                printf("%d %c %d = %d\n", valone, op, valtwo, result);
+                                run = 1;
+                                break;
+                        case 5:
+                                result = valone % valtwo;
+                                printf("%d %c %d = %d " , valone, op, valtwo, result);
+                                run = 1;
+                                break;
+                        default:
+                                printf("This input cannot be operated");
+                                run = 1;
+                                break;
+
+                }
+                break;
+        }
+
+}
