@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(int argc, char *argv[]){
+        time_t current;
+        sleep(*argv[2]); /* the nephew takes the second parameter to sleep */
+        current = time(NULL); /* the time is taken after the nephew sleeps so the program can calculate the duration of the process */
+        printf("%s : finished at %d seconds since January 1, 1970\n", argv[1],  current); /* the name of the nephew and their time is returned */
+        return 0;
+}

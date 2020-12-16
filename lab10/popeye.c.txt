@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
+/* I got the idea to use a random number function from GeeksforGeeks since this does not natively exist in C "https://www.geeksforgeeks.org/generating-random-number-range-c/" */
+int random_num(int lower, int upper){
+                int num = (rand() % (upper - lower + 1)) + lower;
+		return num;
+}
+
+
+int main(){
+        int nephews = 4;
+        int nephewPids[nephews];
+        int currentPid;
+        int iterate = 0;
+        char *execnephew1[] = {"./nephew", "Peepeye", "0",  NULL}; /* each array stores strings that are used to exec child processes to a nephew program */
+        char *execnephew2[] = {"./nephew", "Pupeye", "0", NULL};   /* the nephew program takes two parameters, a name and a number */
+        char *execnephew3[] = {"./nephew", "Pipeye", "0", NULL};   /* the number is used to delay the nephew using sleep() */
+        char *execnephew4[] = {"./nephew", "Poopeye", "0", NULL};
+        char **ptr1 = execnephew1;
+        char **ptr2 = execnephew2;
+        char **ptr3 = execnephew3;
+        char **ptr4 = execnephew4;
+        char randletter[10];
+        int random1 = random_num(4000,10000);
+        sprintf(randletter,"%d",random1);
+        char randletter2[10];
+        int random2 = random_num(4000,10000);
+        sprintf(randletter2,"%d",random2);
+        char randletter3[10];
+        int random3 = random_num(4000,10000);
+        sprintf(randletter3,"%d",random3);
+        char randletter4[10];
+        int random4 = random_num(4000,10000);
+        sprintf(randletter4,"%d",random4); /* random values are created and casted to char arrays */
+        ptr1[2] = randletter;
+        ptr2[2] = randletter2;
+        ptr3[2] = randletter3;
+        ptr4[2] = randletter4;    /* the char arrays are inserted to the arrays that hold the command information and used to execute the nephew program */    
+
+        system("clear");
+        printf("Popeye : My process id is %d\n", getpid());
+        printf("Ready, Set, Go!!!\n");
+
+        for(iterate; iterate < nephews; iterate++){
+                switch(currentPid = fork()){           /* a switch case is used to fork processes for nephew creation */
+                    case 0:
+                           if(iterate == 0){
+                                execv(execnephew1[0], execnephew1);
+                           }
+                           else if(iterate == 1){
+                                execv(execnephew2[0], execnephew2);
+                           }
+                           else if(iterate == 2){
+                                execv(execnephew3[0], execnephew3);
+                           }
+                           else if(iterate ==3){
+                                execv(execnephew4[0], execnephew4); /* All four nephews are executed */
+                           }
+                           return 0;
+                    case -1:
+                            printf("Fork Error\n"); /* detects and out of bounds error */
+                            break;
+                    default:
+                            nephewPids[iterate] = currentPid;
+                            break;
+            }
+    }
+
+    wait(NULL);
+    wait(NULL);
+    wait(NULL);
+    wait(NULL);
+    /* Popeye waits for all 4 nephews before congratulating them */
+    printf("Popeye : Congratulations racers!!!\n");
+}
