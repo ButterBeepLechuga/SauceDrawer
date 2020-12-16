@@ -1,0 +1,58 @@
+/* Lab2.c  -  Jake Breitfeller */
+#include <stdio.h>
+#include <stdlib.h>
+
+int computefactorial(int redirect){ /* This recursive function performs the same operation as the for loop within case 'n' of the switch statement */
+        int increment;
+        int factorial = 1;
+        for(increment = 1; increment <= redirect; ++increment){
+                factorial *= increment;
+        }
+        printf("The factorial of your input is: %d", factorial);
+}
+
+int main()
+{
+        int input, increment;
+        int factorial = 1;
+
+                printf("Enter a number between 1 and 15\n");
+
+
+                while(input <=0 || input > 15){
+                        scanf("%d", &input);   /* The scanner is nested inside the while loop so the program can take input if the user enters incompatible data */
+                        if(input <= 15 && input >= 1){
+                                char recursion;
+                                char y = 'y'; /* y and n are declared as variables because C requires variables to make comparison statements */
+                                char n = 'n';
+                                printf("Is recursion desired? Enter (y/n)\n");
+
+                                while(recursion != y || recursion != n){  /* The comparisons in this while loop require the previous definition */
+                                        scanf(" %c", &recursion); /*  The scanner is nested inside the while loop again for the same reason as it is previously done */
+                                        switch(recursion)
+                                        {
+                                                case 'y':
+                                                        computefactorial(input);
+                                                        break;
+
+                                                case 'n':
+                                                        for(increment = 1; increment <= input; ++increment){
+                                                                factorial *= increment;
+                                                        }
+                                                        printf("The factorial of your input is: %d", factorial);
+                                                        break;
+
+                                                default:
+                                                        printf("This input does not comply, please enter (y/n)\n");
+                                                        continue; /* The continue statement here allows the program to return to the beginning of the while loop so the program can take more input if the user enetered incompatible data again */
+                                        }
+                                        break;
+                                }
+                        }
+                        else {
+                                printf("This input does not comply, please enter a number between 1 and 15\n");
+                        }
+                }
+}
+
+
