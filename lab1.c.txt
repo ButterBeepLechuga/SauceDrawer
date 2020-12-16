@@ -1,0 +1,51 @@
+#include <stdio.h>
+#define PI 3.14159
+
+int main()
+{
+        /*initialize variables using type float*/
+        float thickness, density, inner_diameter, total_diameter;
+        float unit_weight, batch_weight, rim_area;
+        /* thickness = thickness in centimeters */
+        /* density = density in grams/cubic centimeter */
+        /* inner_diameter = diameter of circular cutout of washer */
+        /* total_diameter = diameter of the entire circle */
+        /* unit_weight = the weight of one single washer */
+        /* batch_weight = the combined weight of the batch of washers */
+        /* rim_area = the area of a washer */
+        int batch_quantity;
+        /* batch_quantity = the number of washers in the batch */
+
+        /*the program requests dimensions, qantity and density of the washers*/
+
+        printf("Enter the inner diameter in cm ");
+        scanf("%f", &inner_diameter);
+
+        printf("Enter the outer diameter in cm ");
+        scanf("%f", &total_diameter);
+
+        printf("Enter the thickness in cm ");
+        scanf("%f", &thickness);
+
+        printf("How dense is the washer material in grams/cm^3 ");
+        scanf("%f", &density);
+
+        printf("How many total washers are in the batch? ");
+        scanf("%i", &batch_quantity);
+
+        /*the program performs some mathematics to evaluate the rim area and weight of the washers*/
+
+        rim_area = ((total_diameter/2) * (total_diameter/2) * PI) - ((inner_diameter/2) * (inner_diameter/2) * PI);
+
+        unit_weight = thickness * density * rim_area;
+
+        batch_weight = batch_quantity * unit_weight;
+
+        /*the program outputs the rim area and weight of the washers*/
+
+        printf("\nThe rim area in centimeters is %.5f \n", rim_area);
+
+        printf("The weight of one washer in grams is %.5f \n", unit_weight);
+
+        printf("The weight of the batch of washer in grams is %.5f", batch_weight);
+}
