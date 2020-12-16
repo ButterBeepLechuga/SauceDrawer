@@ -1,3 +1,4 @@
+/* A basic calculator program using a switch statement */
 /* Lab3.c - Jake Breitfeller */
 #include <stdio.h>
 #include <stdlib.h>
