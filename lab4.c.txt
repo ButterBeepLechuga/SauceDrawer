@@ -1,0 +1,30 @@
+/* Lab4.c - Jake Breitfeller */
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+        int numgrades = 0;
+        int grade;
+        int failing = 0;
+        int total = 0;
+        int average = 0;
+
+        printf("How many grades would you like to enter: ");
+        scanf("%d", &numgrades);
+        /* The for loop iterates over the number of grades with variable numgrades */
+        for(int x = 0; x < numgrades; x++){
+                printf("please enter a grade: ");
+                scanf("%d", &grade);
+
+                if (grade < 70){
+                        failing++;
+                }
+
+                total = total + grade;
+        }
+        /* The average is calculated outside the for loop */
+        average = total / numgrades;
+        printf("Number of failing grades: %d \n", failing);
+        printf("Average of grades: %d \n", average);
+
+}
